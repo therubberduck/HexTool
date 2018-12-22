@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,9 +40,9 @@ namespace HexTool
         {
             List<GridItem> items = new List<GridItem>();
             Random r = new Random();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 40; i++)
             {
-                for(int j = 0; j < 3; j++)
+                for(int j = 0; j < 40; j++)
                 {
                     GridItem item = new GridItem { X = i, Y = j };
                     int t = r.Next(3);
