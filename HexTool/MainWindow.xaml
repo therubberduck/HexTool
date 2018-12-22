@@ -1,4 +1,4 @@
-<Window x:Class="HexTool.MainWindow"
+﻿<Window x:Class="HexTool.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,11 +19,13 @@
                     <Setter Property="BorderThickness" Value="1.5"/>
                     <Setter Property="FontSize" Value="16"/>
                     <Setter Property="Background" Value="White"/>
+                    <Setter Property="Height" Value="50"/>
+                    <Setter Property="Width" Value="58"/>
                 </Style>
             </hx:HexList.ItemContainerStyle>
             <hx:HexList.ItemTemplate>
                 <DataTemplate>
-                    <Image Height="24" Width="28" Source="{Binding Path=Image, Mode=OneWay}"/>
+                    <Image Height="48" Width="56" Source="{Binding Path=Source, Mode=OneWay}"/>
                 </DataTemplate>
             </hx:HexList.ItemTemplate>
         </hx:HexList>

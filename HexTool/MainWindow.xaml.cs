@@ -1,18 +1,12 @@
+﻿using HexTool.IconFactory;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SkiaSharp.Views.Desktop;
+using SkiaSharp.Views.WPF;
+using HexGridControl;
+using SkiaSharp;
 
 namespace HexTool
 {
@@ -21,6 +15,8 @@ namespace HexTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Factory f = new Factory();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,11 +29,12 @@ namespace HexTool
 
         private void HxMap_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            (e.AddedItems[e.AddedItems.Count-1] as GridItem).Image = "Images/BDesert.png";
+            
         }
 
         private IEnumerable<GridItem> GetGridItems()
         {
+
             List<GridItem> items = new List<GridItem>();
             Random r = new Random();
             for (int i = 0; i < 40; i++)
@@ -49,15 +46,23 @@ namespace HexTool
                     switch(t)
                     {
                         case 0:
-                            item.Image = "Images/BPlains.png";
+                            item.Background = "Images/BPlains.png";
+                            item.Vegetation = "Images/VGrassland.png";
                             break;
                         case 1:
-                            item.Image = "Images/BForestHills.png";
+                            item.Background = "Images/BForestHills.png";
+                            item.Terrain = "Images/THills.png";
+                            item.Vegetation = "Images/VForest.png";
                             break;
                         case 2:
-                            item.Image = "Images/BDesert.png";
+                            item.Background = "Images/BDesert.png";
+                            if(item.X%2 == 0 && item.Y%2 == 0)
+                            {
+                                item.Feature = "Images/IcMonument.png";
+                            }
                             break;
                     }
+                    item.Image = f.Create(item);
                     items.Add(item);
                 }
             }
