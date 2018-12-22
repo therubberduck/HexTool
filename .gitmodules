@@ -1,0 +1,3 @@
+[submodule "HexGrid"]
+	path = HexGrid
+	url = https://github.com/AlexanderSharykin/HexGrid
