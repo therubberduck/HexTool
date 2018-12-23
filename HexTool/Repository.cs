@@ -1,49 +1,26 @@
 ﻿using HexTool.IconFactory;
 using System;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using SkiaSharp.Views.Desktop;
-using SkiaSharp.Views.WPF;
-using HexGridControl;
-using SkiaSharp;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HexTool
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        private Factory f = new Factory();
-
-        public MainWindow()
+    public class Repository
+    {        
+        public static IEnumerable<HexContent> GetGridItems()
         {
-            InitializeComponent();
-
-            IEnumerable<GridItem> items = GetGridItems();
-            hxMap.ItemsSource = items;
-
-            hxMap.SelectionChanged += HxMap_SelectionChanged;
-        }
-
-        private void HxMap_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private IEnumerable<GridItem> GetGridItems()
-        {
-
-            List<GridItem> items = new List<GridItem>();
+            Factory f = new Factory();
+            List<HexContent> items = new List<HexContent>();
             Random r = new Random();
             for (int i = 0; i < 40; i++)
             {
-                for(int j = 0; j < 40; j++)
+                for (int j = 0; j < 40; j++)
                 {
-                    GridItem item = new GridItem { X = i, Y = j };
+                    HexContent item = new HexContent { X = i, Y = j };
                     int t = r.Next(3);
-                    switch(t)
+                    switch (t)
                     {
                         case 0:
                             item.Background = "Images/BPlains.png";
@@ -56,7 +33,7 @@ namespace HexTool
                             break;
                         case 2:
                             item.Background = "Images/BDesert.png";
-                            if(item.X%2 == 0 && item.Y%2 == 0)
+                            if (item.X % 2 == 0 && item.Y % 2 == 0)
                             {
                                 item.Feature = "Images/IcMonument.png";
                             }

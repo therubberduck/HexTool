@@ -3,31 +3,30 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace HexTool
+namespace HexTool.VVM
 {
-    public class GridItem : DependencyObject
+    public class HexContentVm : DependencyObject
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get { return _content.X; } }
+        public int Y { get { return _content.Y; } }
 
-        public static readonly DependencyProperty BitmapImageProperty = DependencyProperty.Register("Source", typeof(BitmapImage), typeof(DependencyObject));
+        public static readonly DependencyProperty BitmapImageProperty = DependencyProperty.Register("Source", typeof(BitmapImage), typeof(HexContentVm));
 
-        public BitmapImage Source {
+        public BitmapImage Source
+        {
             get { return (BitmapImage)GetValue(BitmapImageProperty); }
         }
 
-        public Bitmap Image
+        private HexContent _content;
+        public HexContent Content
         {
-            set {
-                var bitmapimage = BitmapToImageSource(value);
-                SetValue(BitmapImageProperty, bitmapimage);
+            get { return _content; }
+            set
+            {
+                _content = value;
+                SetValue(BitmapImageProperty, BitmapToImageSource(value.Image));
             }
         }
-
-        public string Background;
-        public string Terrain;
-        public string Vegetation;
-        public string Feature;
 
         private BitmapImage BitmapToImageSource(Bitmap bitmap)
         {

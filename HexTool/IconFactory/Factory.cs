@@ -7,7 +7,7 @@ namespace HexTool.IconFactory
 {
     public class Factory
     {
-        public Bitmap Create(GridItem item)
+        public Bitmap Create(HexContent item)
         {
             SKBitmap skiaBitmap = LoadBitmap(item.Background);
 
