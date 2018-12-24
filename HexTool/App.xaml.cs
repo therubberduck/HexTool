@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HexTool.Database;
+using HexTool.VVM;
+using System;
 using System.Windows;
 
 namespace HexTool
@@ -13,5 +10,24 @@ namespace HexTool
     /// </summary>
     public partial class App : Application
     {
+        private static DbInterface _db;
+        public DbInterface Db { get { return _db; } }
+
+        App()
+        {
+            InitializeComponent();
+        }
+
+        [STAThread]
+        static void Main()
+        {
+            App app = new App();
+
+            _db = new DbInterface("db.sqlite");
+
+            app.MainWindow = new MapWindow();
+            app.MainWindow.Show();
+            app.Run();
+        }
     }
 }

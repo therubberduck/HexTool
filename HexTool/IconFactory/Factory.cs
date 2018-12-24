@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using HexTool.Model.HexMap;
+using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System.Drawing;
 using System.IO;
@@ -9,22 +10,22 @@ namespace HexTool.IconFactory
     {
         public Bitmap Create(HexContent item)
         {
-            SKBitmap skiaBitmap = LoadBitmap(item.Background);
+            SKBitmap skiaBitmap = LoadBitmap(item.BackgroundImagePath);
 
             SKCanvas canvas = new SKCanvas(skiaBitmap);
-            if (item.Terrain != null)
+            if (item.TerrainImagePath != null)
             {
-                SKBitmap layer = LoadBitmap(item.Terrain);
+                SKBitmap layer = LoadBitmap(item.TerrainImagePath);
                 canvas.DrawBitmap(layer, 0, 0);
             }
-            if (item.Vegetation != null)
+            if (item.VegetationImagePath != null)
             {
-                SKBitmap layer = LoadBitmap(item.Vegetation);
+                SKBitmap layer = LoadBitmap(item.VegetationImagePath);
                 canvas.DrawBitmap(layer, 0, 0);
             }
-            if (item.Feature != null)
+            if (item.FeatureImagePath != null)
             {
-                SKBitmap layer = LoadBitmap(item.Feature);
+                SKBitmap layer = LoadBitmap(item.FeatureImagePath);
                 canvas.DrawBitmap(layer, 0, 0);
             }
 

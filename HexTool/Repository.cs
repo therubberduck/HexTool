@@ -1,9 +1,7 @@
 ﻿using HexTool.IconFactory;
+using HexTool.Model.HexMap;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HexTool
 {
@@ -14,32 +12,32 @@ namespace HexTool
             Factory f = new Factory();
             List<HexContent> items = new List<HexContent>();
             Random r = new Random();
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 40; j++)
+                for (int j = 0; j < 10; j++)
                 {
                     HexContent item = new HexContent { X = i, Y = j };
                     int t = r.Next(3);
                     switch (t)
                     {
                         case 0:
-                            item.Background = "Images/BPlains.png";
-                            item.Vegetation = "Images/VGrassland.png";
+                            item.BackgroundImageId = 10006;
+                            item.VegetationImageId = 30004;
                             break;
                         case 1:
-                            item.Background = "Images/BForestHills.png";
-                            item.Terrain = "Images/THills.png";
-                            item.Vegetation = "Images/VForest.png";
+                            item.BackgroundImageId = 10004;
+                            item.TerrainImageId = 20001;
+                            item.VegetationImageId = 30003;
                             break;
                         case 2:
-                            item.Background = "Images/BDesert.png";
+                            item.BackgroundImageId = 10001;
+                            item.VegetationImageId = 30001;
                             if (item.X % 2 == 0 && item.Y % 2 == 0)
                             {
-                                item.Feature = "Images/IcMonument.png";
+                                item.FeatureImageId = 40005;
                             }
                             break;
                     }
-                    item.Image = f.Create(item);
                     items.Add(item);
                 }
             }

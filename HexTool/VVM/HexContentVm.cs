@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using HexTool.Model.HexMap;
+using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -24,7 +25,7 @@ namespace HexTool.VVM
             set
             {
                 _content = value;
-                SetValue(BitmapImageProperty, BitmapToImageSource(value.Image));
+                SetValue(BitmapImageProperty, BitmapToImageSource(value.MapImage));
             }
         }
 
