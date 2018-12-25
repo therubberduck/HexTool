@@ -1,13 +1,38 @@
-﻿using HexTool.IconFactory;
+﻿using HexTool.Database;
+using HexTool.IconFactory;
 using HexTool.Model.HexMap;
 using System;
 using System.Collections.Generic;
 
-namespace HexTool
+namespace HexTool.VVM
 {
-    public class Repository
-    {        
-        public static IEnumerable<HexContent> GetGridItems()
+    public class MapRepo : DbRepo
+    {
+        public MapRepo(DbInterface db) : base(db)
+        {
+
+        }
+
+        public List<HexContent> GetMapContent()
+        {
+            return _db.HexContent.GetAll();
+        }
+
+        public void ClearMap()
+        {
+            _db.HexContent.ClearTable();
+        }
+
+        public void CreateTestData()
+        {
+            IEnumerable<HexContent> items = CreateTestGridItems();
+            foreach (HexContent hex in items)
+            {
+                _db.HexContent.Create(hex);
+            }
+        }
+
+        private IEnumerable<HexContent> CreateTestGridItems()
         {
             Factory f = new Factory();
             List<HexContent> items = new List<HexContent>();

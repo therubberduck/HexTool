@@ -83,10 +83,12 @@
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
     <Compile Include="IconFactory\ImageMapper.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="VVM\BaseViewModel.cs" />
-    <Compile Include="VVM\HexContentVm.cs" />
-    <Compile Include="VVM\MapWindow.xaml.cs">
+    <Compile Include="VVM\Boilerplate\Repo.cs" />
+    <Compile Include="VVM\Boilerplate\DbRepo.cs" />
+    <Compile Include="VVM\MapWindow\MapRepo.cs" />
+    <Compile Include="VVM\Boilerplate\BaseViewModel.cs" />
+    <Compile Include="VVM\MapWindow\HexContentVm.cs" />
+    <Compile Include="VVM\MapWindow\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Database\DbInterface.cs" />
@@ -94,12 +96,12 @@
     <Compile Include="Database\Schema\DbHexContent.cs" />
     <Compile Include="Model\HexMap\HexContent.cs" />
     <Compile Include="IconFactory\Factory.cs" />
-    <Compile Include="VVM\MapWindowVM.cs" />
+    <Compile Include="VVM\MapWindow\MapWindowVM.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="VVM\MapWindow.xaml">
+    <Page Include="VVM\MapWindow\MapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
