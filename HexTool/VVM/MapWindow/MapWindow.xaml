@@ -10,7 +10,21 @@
         WindowStartupLocation="CenterScreen"
         Height="350" Width="525">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Width="100"
+            Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
+            <Button 
+                Content="Desert" Click="DesertButton_Click"/>
+            <Button 
+                Content="Plain" Click="PlainButton_Click"/>
+            <Button 
+                Content="Forest" Click="ForestButton_Click"/>
+        </StackPanel>
         <hx:HexList Name="hxMap"
+            Grid.Column="1" Grid.Row="0"
             ItemsSource="{Binding Path=Hexes, Mode=OneWay}"
             ColumnCount="40" RowCount="40" Orientation="Horizontal" 
             ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">

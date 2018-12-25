@@ -25,8 +25,13 @@ namespace HexTool.VVM
             set
             {
                 _content = value;
-                SetValue(BitmapImageProperty, BitmapToImageSource(value.MapImage));
+                UpdateImage();
             }
+        }
+
+        public void UpdateImage()
+        {
+            SetValue(BitmapImageProperty, BitmapToImageSource(_content.MapImage));
         }
 
         private BitmapImage BitmapToImageSource(Bitmap bitmap)

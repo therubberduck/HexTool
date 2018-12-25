@@ -18,6 +18,12 @@ namespace HexTool.VVM
             return _db.HexContent.GetAll();
         }
 
+        public void UpdateHex(HexContent hex)
+        {
+
+            _db.HexContent.Update(hex);
+        }
+
         public void ClearMap()
         {
             _db.HexContent.ClearTable();

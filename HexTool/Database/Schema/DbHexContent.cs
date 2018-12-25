@@ -1,4 +1,5 @@
-﻿using HexTool.Model.HexMap;
+﻿using System;
+using HexTool.Model.HexMap;
 using SqliteDatabaseLibrary;
 
 namespace HexTool.Database.Schema
@@ -32,9 +33,17 @@ namespace HexTool.Database.Schema
         {
             return Db.Insert(TableName,
                 new[] { X, Y, BackgroundImageId, TerrainImageId, VegetationImageId, FeatureImageId }, 
-                new[] { item.X.ToString(), item.Y.ToString(), item.BackgroundImageId.ToString(), item.TerrainImageId.ToString(), item.VegetationImageId.ToString(), item.FeatureImageId.ToString() });
+                new object[] { item.X, item.Y, item.BackgroundImageId, item.TerrainImageId, item.VegetationImageId, item.FeatureImageId });
         }
-                
+
+        public void Update(HexContent hex)
+        {
+            Db.Update(TableName,
+                new[] { BackgroundImageId, TerrainImageId, VegetationImageId, FeatureImageId },
+                new object[] { hex.BackgroundImageId, hex.TerrainImageId, hex.VegetationImageId, hex.FeatureImageId },
+                Id, hex.Id);
+        }
+
         protected override HexContent MakeObject(object[] dbObject)
         {
             DbResultReader reader = new DbResultReader(dbObject);
