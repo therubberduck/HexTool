@@ -7,30 +7,13 @@ namespace HexTool.VVM
 {
     public partial class MapWindow : Window
     {
-        public MapWindow()
+        public MapWindow(MapWindowVM vm)
         {
             InitializeComponent();
-
-            var db = (Application.Current as App).Db;
-
-            db.HexContent.ClearTable();
-
-            IEnumerable<HexContent> items = Repository.GetGridItems();
-            foreach(HexContent hex in items)
-            {
-                db.HexContent.Create(hex);
-            }
-
-            var dbItems = db.HexContent.GetAll();
-
-            MapWindowVM vm = new MapWindowVM();
-            vm.SetContent(dbItems);
 
             hxMap.DataContext = vm;
 
             hxMap.SelectionChanged += HxMap_SelectionChanged;
-
-
         }
 
         private void HxMap_SelectionChanged(object sender, SelectionChangedEventArgs e)

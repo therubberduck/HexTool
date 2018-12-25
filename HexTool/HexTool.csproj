@@ -84,6 +84,7 @@
     <Compile Include="App.xaml.cs" />
     <Compile Include="IconFactory\ImageMapper.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="VVM\BaseViewModel.cs" />
     <Compile Include="VVM\HexContentVm.cs" />
     <Compile Include="VVM\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>

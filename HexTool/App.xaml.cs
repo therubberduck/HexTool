@@ -25,7 +25,9 @@ namespace HexTool
 
             _db = new DbInterface("db.sqlite");
 
-            app.MainWindow = new MapWindow();
+            var rootVm = new MapWindowVM(_db);
+
+            app.MainWindow = rootVm.Window;
             app.MainWindow.Show();
             app.Run();
         }
