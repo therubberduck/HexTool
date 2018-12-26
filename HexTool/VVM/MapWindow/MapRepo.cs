@@ -1,5 +1,4 @@
 ﻿using HexTool.Database;
-using HexTool.IconFactory;
 using HexTool.Model.HexMap;
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,6 @@ namespace HexTool.VVM
 
         private IEnumerable<HexContent> CreateTestGridItems()
         {
-            Factory f = new Factory();
             List<HexContent> items = new List<HexContent>();
             Random r = new Random();
             for (int i = 0; i < 10; i++)

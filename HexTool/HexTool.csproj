@@ -42,6 +42,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.68.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.68.0\lib\net45\SkiaSharp.dll</HintPath>
     </Reference>
@@ -82,7 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
-    <Compile Include="IconFactory\ImageMapper.cs" />
+    <Compile Include="Model\HexMap\MapBrush.cs" />
+    <Compile Include="ResourceHandling\ResourceRepository.cs" />
+    <Compile Include="ResourceHandling\JsonDO.cs" />
     <Compile Include="VVM\Boilerplate\Repo.cs" />
     <Compile Include="VVM\Boilerplate\DbRepo.cs" />
     <Compile Include="VVM\MapWindow\MapRepo.cs" />
@@ -95,7 +100,7 @@
     <Compile Include="Database\DbUpdater.cs" />
     <Compile Include="Database\Schema\DbHexContent.cs" />
     <Compile Include="Model\HexMap\HexContent.cs" />
-    <Compile Include="IconFactory\Factory.cs" />
+    <Compile Include="ResourceHandling\Factory.cs" />
     <Compile Include="VVM\MapWindow\MapWindowVM.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -120,11 +125,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\res.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Images\Transparent.Bakpng" />
+    <Content Include="Resources\Images\Transparent.Bakpng" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,208 +153,208 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\BDesert.png">
+    <Content Include="Resources\Images\BDesert.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BFarmland.png">
+    <Content Include="Resources\Images\BFarmland.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BForest.png">
+    <Content Include="Resources\Images\BForest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BForestHills.png">
+    <Content Include="Resources\Images\BForestHills.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BForestMountains.png">
+    <Content Include="Resources\Images\BForestMountains.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BHills.png">
+    <Content Include="Resources\Images\BHills.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BMountains.png">
+    <Content Include="Resources\Images\BMountains.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BPlains.png">
+    <Content Include="Resources\Images\BPlains.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BSea.png">
+    <Content Include="Resources\Images\BSea.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\BSolidRock.png">
+    <Content Include="Resources\Images\BSolidRock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\drawingguide.png">
+    <Content Include="Resources\Images\drawingguide.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\FogOfWar.png">
+    <Content Include="Resources\Images\FogOfWar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcCastle.png">
+    <Content Include="Resources\Images\IcCastle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcCave.png">
+    <Content Include="Resources\Images\IcCave.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcCity.png">
+    <Content Include="Resources\Images\IcCity.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcFlags.png">
+    <Content Include="Resources\Images\IcFlags.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcFort.png">
+    <Content Include="Resources\Images\IcFort.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcHamlet.png">
+    <Content Include="Resources\Images\IcHamlet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcLake.png">
+    <Content Include="Resources\Images\IcLake.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcLandmarkHuge.png">
+    <Content Include="Resources\Images\IcLandmarkHuge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcLandmarkLarge.png">
+    <Content Include="Resources\Images\IcLandmarkLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcLandmarkSmall.png">
+    <Content Include="Resources\Images\IcLandmarkSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcMonument.png">
+    <Content Include="Resources\Images\IcMonument.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcRuinCity.png">
+    <Content Include="Resources\Images\IcRuinCity.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcRuinFort.png">
+    <Content Include="Resources\Images\IcRuinFort.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcRuinSettlement.png">
+    <Content Include="Resources\Images\IcRuinSettlement.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcRuinStructure.png">
+    <Content Include="Resources\Images\IcRuinStructure.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcRuinTower.png">
+    <Content Include="Resources\Images\IcRuinTower.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcStructure.png">
+    <Content Include="Resources\Images\IcStructure.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcTower.png">
+    <Content Include="Resources\Images\IcTower.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcTown.png">
+    <Content Include="Resources\Images\IcTown.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\IcVillage.png">
+    <Content Include="Resources\Images\IcVillage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\LoadingIndicator.gif">
+    <Content Include="Resources\Images\LoadingIndicator.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Moon.png">
+    <Content Include="Resources\Images\Moon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\O9S1SH0.jpg">
+    <Content Include="Resources\Images\O9S1SH0.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\PartyIndicator.png">
+    <Content Include="Resources\Images\PartyIndicator.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\SelectBorder.png">
+    <Content Include="Resources\Images\SelectBorder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\sun.png">
+    <Content Include="Resources\Images\sun.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\TCave.png">
+    <Content Include="Resources\Images\TCave.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\THills.png">
+    <Content Include="Resources\Images\THills.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\TMountains.png">
+    <Content Include="Resources\Images\TMountains.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Transparent.png">
+    <Content Include="Resources\Images\Transparent.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\TSmallCave.png">
+    <Content Include="Resources\Images\TSmallCave.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\TTunnels.png">
+    <Content Include="Resources\Images\TTunnels.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\TVolcano.png">
+    <Content Include="Resources\Images\TVolcano.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VCCopse.png">
+    <Content Include="Resources\Images\VCCopse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VCForest.png">
+    <Content Include="Resources\Images\VCForest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VCopse.png">
+    <Content Include="Resources\Images\VCopse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VDesert.png">
+    <Content Include="Resources\Images\VDesert.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VFarmland.png">
+    <Content Include="Resources\Images\VFarmland.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VForest.png">
+    <Content Include="Resources\Images\VForest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VGrassland.png">
+    <Content Include="Resources\Images\VGrassland.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VJungle.png">
+    <Content Include="Resources\Images\VJungle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VMCopse.png">
+    <Content Include="Resources\Images\VMCopse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VMForest.png">
+    <Content Include="Resources\Images\VMForest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VRocky.png">
+    <Content Include="Resources\Images\VRocky.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VSnow.png">
+    <Content Include="Resources\Images\VSnow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\VSwamp.png">
+    <Content Include="Resources\Images\VSwamp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Cloud.png">
+    <Content Include="Resources\Images\W_Cloud.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Clouds.png">
+    <Content Include="Resources\Images\W_Clouds.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Fog.png">
+    <Content Include="Resources\Images\W_Fog.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_HeavyRain.png">
+    <Content Include="Resources\Images\W_HeavyRain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_LightRain.png">
+    <Content Include="Resources\Images\W_LightRain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Rain.png">
+    <Content Include="Resources\Images\W_Rain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Sleet.png">
+    <Content Include="Resources\Images\W_Sleet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Snow.png">
+    <Content Include="Resources\Images\W_Snow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Sun.png">
+    <Content Include="Resources\Images\W_Sun.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\W_Thunderstorm.png">
+    <Content Include="Resources\Images\W_Thunderstorm.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

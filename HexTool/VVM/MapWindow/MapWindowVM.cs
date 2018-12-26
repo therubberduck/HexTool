@@ -1,8 +1,7 @@
-﻿using HexTool.Database;
-using HexTool.Model.HexMap;
+﻿using HexTool.Model.HexMap;
 using System.Collections.Generic;
 using System.Windows;
-using System;
+using HexTool.ResourceHandling;
 
 namespace HexTool.VVM
 {
@@ -27,6 +26,7 @@ namespace HexTool.VVM
 
             //Create window
             Window = new MapWindow(this);
+
         }
 
         private List<HexContentVm> ContertHexesToVm(List<HexContent> hexes)

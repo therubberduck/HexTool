@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using HexTool.IconFactory;
+using HexTool.ResourceHandling;
 
 namespace HexTool.Model.HexMap
 {
@@ -15,11 +15,6 @@ namespace HexTool.Model.HexMap
         public int VegetationImageId;
         public int FeatureImageId;
 
-        public string BackgroundImagePath { get { return ImageMapper.GetImageUrl(BackgroundImageId); } }
-        public string TerrainImagePath { get { return ImageMapper.GetImageUrl(TerrainImageId); } }
-        public string VegetationImagePath { get { return ImageMapper.GetImageUrl(VegetationImageId); } }
-        public string FeatureImagePath { get { return ImageMapper.GetImageUrl(FeatureImageId); } }
-
-        public Bitmap MapImage { get { return new Factory().Create(this); } }
+        public Bitmap MapImage { get { return Factory.Instance().Create(this); } }
     }
 }

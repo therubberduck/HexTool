@@ -1,4 +1,5 @@
 ﻿using HexTool.Database;
+using HexTool.ResourceHandling;
 using HexTool.VVM;
 using System;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace HexTool
             App app = new App();
 
             _db = new DbInterface("db.sqlite");
+
+            Factory.Init();
 
             var rootVm = new MapWindowVM(new MapRepo(_db));
 

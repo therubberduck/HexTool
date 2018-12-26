@@ -1,6 +1,4 @@
-﻿using HexTool.Model.HexMap;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace HexTool.VVM
