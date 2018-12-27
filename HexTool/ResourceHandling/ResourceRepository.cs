@@ -10,22 +10,39 @@ namespace HexTool.ResourceHandling
 
     public class ResourceRepository
     {
+        private static ResourceRepository _instance;
+        public static ResourceRepository Instance()
+        {
+            return _instance;
+        }
+
         private List<MapBrush> _brushes = new List<MapBrush>();
         private Dictionary<int, SKBitmap> _imageBitmaps = new Dictionary<int, SKBitmap>();
 
-        public void Init()
+        private ResourceRepository()
+        {
+
+        }
+
+        public static void Init()
+        {
+            _instance = new ResourceRepository();
+            _instance.InitData();
+        }
+
+        private void InitData()
         {
             var jsonText = File.ReadAllText("Resources/res.txt");
             var jsonDo = JsonConvert.DeserializeObject<JsonDO>(jsonText);
-            
-            foreach(int imageId in jsonDo.Images.Keys)
+
+            foreach (int imageId in jsonDo.Images.Keys)
             {
                 var path = jsonDo.Images[imageId];
-                var bitmap = LoadBitmap("Resources/"+path);
+                var bitmap = LoadBitmap("Resources/" + path);
                 _imageBitmaps.Add(imageId, bitmap);
             }
 
-            foreach(string name in jsonDo.Brushes.Keys)
+            foreach (string name in jsonDo.Brushes.Keys)
             {
                 int[] imageIds = jsonDo.Brushes[name];
 
@@ -33,7 +50,7 @@ namespace HexTool.ResourceHandling
                 int terrain = -1;
                 int vegetation = -1;
                 int feature = -1;
-                foreach(int imageId in imageIds)
+                foreach (int imageId in imageIds)
                 {
                     var imageType = (ResourceImageType)(imageId / 1000); //Get the first two numbers of our 5-digit number
                     switch (imageType)
@@ -52,11 +69,17 @@ namespace HexTool.ResourceHandling
                             break;
                         default:
                             throw new InvalidDataException("No ImageType exists matching the given id");
-                    }                                     
+                    }
                 }
 
                 var brush = new MapBrush(name, background, terrain, vegetation, feature);
+                _brushes.Add(brush);
             }
+        }
+
+        public List<MapBrush> GetBrushes()
+        {
+            return _brushes;
         }
 
         public SKBitmap GetImage(int imageId)

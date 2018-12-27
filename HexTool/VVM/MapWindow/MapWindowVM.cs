@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using System.Windows;
 using HexTool.ResourceHandling;
+using System;
 
 namespace HexTool.VVM
 {
     public class MapWindowVM : BaseViewModel<MapRepo>
     {
-        private int _brush;
+        public static readonly DependencyProperty BrushesProperty = DependencyProperty.Register("Brushes", typeof(List<MapBrush>), typeof(MapWindowVM));
+        List<MapBrush> Brushes
+        {
+            get { return (List<MapBrush>)GetValue(BrushesProperty); }
+            set { SetValue(BrushesProperty, value); }
+        }
+
+        private MapBrush _activeBrush;
 
         public static readonly DependencyProperty HexesProperty = DependencyProperty.Register("Hexes", typeof(List<HexContentVm>), typeof(MapWindowVM));
-
         List<HexContentVm> Hexes {
             get { return (List<HexContentVm>)GetValue(HexesProperty); }
             set { SetValue(HexesProperty, value); }
@@ -23,10 +30,12 @@ namespace HexTool.VVM
             //_repo.CreateTestData();
             var hexes = _repo.GetMapContent();            
             Hexes = ContertHexesToVm(hexes);
+            hexes = null;
+
+            Brushes = _repo.GetBrushes();
 
             //Create window
             Window = new MapWindow(this);
-
         }
 
         private List<HexContentVm> ContertHexesToVm(List<HexContent> hexes)
@@ -43,29 +52,15 @@ namespace HexTool.VVM
         {
             var hex = hexContentVm.Content;
 
-            switch(_brush)
-            {
-                case 0:
-                    hex.BackgroundImageId = 10001;
-                    hex.VegetationImageId = 30001;
-                    break;
-                case 1:
-                    hex.BackgroundImageId = 10003;
-                    hex.VegetationImageId = 30003;
-                    break;
-                case 2:
-                    hex.BackgroundImageId = 10006;
-                    hex.VegetationImageId = 30004;
-                    break;
-            }
+            hex.Paint(_activeBrush);
 
             hexContentVm.UpdateImage();
             _repo.UpdateHex(hex);
         }
 
-        public void SetBrush(int brush)
+        public void SetBrush(MapBrush brush)
         {
-            _brush = brush;
+            _activeBrush = brush;
         }
     }
 }

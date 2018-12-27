@@ -22,15 +22,18 @@ namespace HexTool.ResourceHandling
 
         private Factory()
         {
-            _resRepo = new ResourceRepository();
-            _resRepo.Init();
+            _resRepo = ResourceRepository.Instance();
         }
 
         public Bitmap Create(HexContent item)
         {
-            SKBitmap skiaBitmap = _resRepo.GetImage(item.BackgroundImageId);
+            SKBitmap background = _resRepo.GetImage(item.BackgroundImageId);
+            SKBitmap finishedHex = new SKBitmap(background.Width, background.Height);
 
-            SKCanvas canvas = new SKCanvas(skiaBitmap);
+            SKCanvas canvas = new SKCanvas(finishedHex);
+
+            canvas.DrawBitmap(background, 0, 0);
+
             var terrain = _resRepo.GetImage(item.TerrainImageId);
             if (terrain != null)
             {
@@ -47,7 +50,7 @@ namespace HexTool.ResourceHandling
                 canvas.DrawBitmap(feature, 0, 0);
             }
 
-            return skiaBitmap.ToBitmap();
+            return finishedHex.ToBitmap();
         }
     }
 }

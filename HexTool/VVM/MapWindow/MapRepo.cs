@@ -1,5 +1,6 @@
 ﻿using HexTool.Database;
 using HexTool.Model.HexMap;
+using HexTool.ResourceHandling;
 using System;
 using System.Collections.Generic;
 
@@ -7,9 +8,16 @@ namespace HexTool.VVM
 {
     public class MapRepo : DbRepo
     {
+        private ResourceRepository _resRepo;
+
         public MapRepo(DbInterface db) : base(db)
         {
+            _resRepo = ResourceRepository.Instance();
+        }
 
+        public List<MapBrush> GetBrushes()
+        {
+            return _resRepo.GetBrushes();
         }
 
         public List<HexContent> GetMapContent()

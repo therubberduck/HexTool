@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using HexTool.Model.HexMap;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace HexTool.VVM
@@ -13,7 +14,7 @@ namespace HexTool.VVM
 
             _vm = vm;
 
-            hxMap.DataContext = _vm;
+            DataContext = _vm;
 
             hxMap.SelectionChanged += HxMap_SelectionChanged;
         }
@@ -27,19 +28,9 @@ namespace HexTool.VVM
             }
         }
 
-        private void DesertButton_Click(object sender, RoutedEventArgs e)
+        private void BrushButton_Click(object sender, RoutedEventArgs e)
         {
-            _vm.SetBrush(0);
-        }
-
-        private void ForestButton_Click(object sender, RoutedEventArgs e)
-        {
-            _vm.SetBrush(1);
-        }
-
-        private void PlainButton_Click(object sender, RoutedEventArgs e)
-        {
-            _vm.SetBrush(2);
+            _vm.SetBrush((sender as Button).DataContext as MapBrush);
         }
     }
 }
