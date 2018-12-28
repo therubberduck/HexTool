@@ -2,13 +2,14 @@
 using System.Windows;
 using System.Windows.Controls;
 
+// ReSharper disable once CheckNamespace
 namespace HexTool.VVM
 {
     public partial class MapWindow : Window
     {
-        private MapWindowVM _vm;
+        private readonly MapWindowVm _vm;
 
-        public MapWindow(MapWindowVM vm)
+        public MapWindow(MapWindowVm vm)
         {
             InitializeComponent();
 
@@ -30,7 +31,7 @@ namespace HexTool.VVM
 
         private void BrushButton_Click(object sender, RoutedEventArgs e)
         {
-            _vm.SetBrush((sender as Button).DataContext as MapBrush);
+            _vm.SetBrush((sender as Button)?.DataContext as MapBrush);
         }
     }
 }

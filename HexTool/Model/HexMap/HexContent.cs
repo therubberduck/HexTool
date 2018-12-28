@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using HexTool.ResourceHandling;
 
 namespace HexTool.Model.HexMap
@@ -16,7 +15,7 @@ namespace HexTool.Model.HexMap
         public int VegetationImageId;
         public int FeatureImageId;
 
-        public Bitmap MapImage { get { return Factory.Instance().Create(this); } }
+        public Bitmap MapImage => Factory.Instance().Create(this);
 
         internal void Paint(MapBrush activeBrush)
         {

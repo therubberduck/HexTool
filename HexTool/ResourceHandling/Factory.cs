@@ -7,7 +7,7 @@ namespace HexTool.ResourceHandling
 {
     public class Factory
     {
-        private ResourceRepository _resRepo;
+        private readonly ResourceRepository _resRepo;
 
         private static Factory _instance;
         public static Factory Instance()

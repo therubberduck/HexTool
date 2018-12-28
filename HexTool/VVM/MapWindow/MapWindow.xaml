@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hx="clr-namespace:HexGridControl;assembly=HexGridControl"
         xmlns:local="clr-namespace:HexTool.VVM"
+        xmlns:mhexMap="clr-namespace:HexTool.Model.HexMap"
         mc:Ignorable="d"
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen"
@@ -18,7 +19,7 @@
             Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"
             ItemsSource="{Binding Brushes}">
             <ItemsControl.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="mhexMap:MapBrush">
                     <Button Content="{Binding Name}" Click="BrushButton_Click"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>            
@@ -40,7 +41,7 @@
                 </Style>
             </hx:HexList.ItemContainerStyle>
             <hx:HexList.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="local:HexContentVm">
                     <Image Height="48" Width="56" Source="{Binding Path=Source, Mode=OneWay}"/>
                 </DataTemplate>
             </hx:HexList.ItemTemplate>

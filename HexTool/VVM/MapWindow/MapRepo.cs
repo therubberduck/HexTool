@@ -4,11 +4,12 @@ using HexTool.ResourceHandling;
 using System;
 using System.Collections.Generic;
 
+// ReSharper disable once CheckNamespace
 namespace HexTool.VVM
 {
     public class MapRepo : DbRepo
     {
-        private ResourceRepository _resRepo;
+        private readonly ResourceRepository _resRepo;
 
         public MapRepo(DbInterface db) : base(db)
         {

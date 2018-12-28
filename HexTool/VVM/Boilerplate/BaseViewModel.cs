@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
+// ReSharper disable once CheckNamespace
 namespace HexTool.VVM
 {
-    public abstract class BaseViewModel<R> : DependencyObject
+    public abstract class BaseViewModel<T> : DependencyObject
     {
         public Window Window {get; protected set;}
 
-        protected R _repo;
+        protected T _repo;
 
-        protected BaseViewModel(R repo)
+        protected BaseViewModel(T repo)
         {
             _repo = repo;
         }

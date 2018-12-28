@@ -88,7 +88,6 @@
     <Compile Include="Debug\DebugDataBindingConverter.cs" />
     <Compile Include="Model\HexMap\MapBrush.cs" />
     <Compile Include="ResourceHandling\ResourceRepository.cs" />
-    <Compile Include="ResourceHandling\JsonDO.cs" />
     <Compile Include="VVM\Boilerplate\Repo.cs" />
     <Compile Include="VVM\Boilerplate\DbRepo.cs" />
     <Compile Include="VVM\MapWindow\MapRepo.cs" />

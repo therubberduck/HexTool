@@ -2,11 +2,11 @@
 {
     public class MapBrush
     {
-        public string Name { get; private set; }
-        public int BackgroundId { get; private set; }
-        public int TerrainId { get; private set; }
-        public int VegetationId { get; private set; }
-        public int FeatureId { get; private set; }
+        public string Name { get; }
+        public int BackgroundId { get; }
+        public int TerrainId { get; }
+        public int VegetationId { get; }
+        public int FeatureId { get; }
 
         public MapBrush(string name, 
             int backgroundId, int terrainId,

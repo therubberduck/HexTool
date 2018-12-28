@@ -1,5 +1,4 @@
-﻿using System;
-using HexTool.Model.HexMap;
+﻿using HexTool.Model.HexMap;
 using SqliteDatabaseLibrary;
 
 namespace HexTool.Database.Schema

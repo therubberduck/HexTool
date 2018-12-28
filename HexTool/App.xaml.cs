@@ -13,7 +13,6 @@ namespace HexTool
     public partial class App : Application
     {
         private static DbInterface _db;
-        public DbInterface Db { get { return _db; } }
 
         App()
         {
@@ -39,10 +38,10 @@ namespace HexTool
             ResourceRepository.Init(); //Set before factory as factory uses it
             Factory.Init();
 
-            var rootVm = new MapWindowVM(new MapRepo(_db));
+            var rootVm = new MapWindowVm(new MapRepo(_db));
 
             app.MainWindow = rootVm.Window;
-            app.MainWindow.Show();
+            app.MainWindow?.Show();
             app.Run();
         }
     }

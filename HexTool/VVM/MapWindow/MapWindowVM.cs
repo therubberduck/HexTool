@@ -1,36 +1,35 @@
 ﻿using HexTool.Model.HexMap;
 using System.Collections.Generic;
 using System.Windows;
-using HexTool.ResourceHandling;
-using System;
 
+// ReSharper disable once CheckNamespace
 namespace HexTool.VVM
 {
-    public class MapWindowVM : BaseViewModel<MapRepo>
+    public class MapWindowVm : BaseViewModel<MapRepo>
     {
-        public static readonly DependencyProperty BrushesProperty = DependencyProperty.Register("Brushes", typeof(List<MapBrush>), typeof(MapWindowVM));
+        public static readonly DependencyProperty BrushesProperty = DependencyProperty.Register("Brushes", typeof(List<MapBrush>), typeof(MapWindowVm));
         List<MapBrush> Brushes
         {
-            get { return (List<MapBrush>)GetValue(BrushesProperty); }
-            set { SetValue(BrushesProperty, value); }
+            get => (List<MapBrush>)GetValue(BrushesProperty);
+            set => SetValue(BrushesProperty, value);
         }
 
         private MapBrush _activeBrush;
 
-        public static readonly DependencyProperty HexesProperty = DependencyProperty.Register("Hexes", typeof(List<HexContentVm>), typeof(MapWindowVM));
+        public static readonly DependencyProperty HexesProperty = DependencyProperty.Register("Hexes", typeof(List<HexContentVm>), typeof(MapWindowVm));
         List<HexContentVm> Hexes {
-            get { return (List<HexContentVm>)GetValue(HexesProperty); }
-            set { SetValue(HexesProperty, value); }
+            get => (List<HexContentVm>)GetValue(HexesProperty);
+            set => SetValue(HexesProperty, value);
         }
 
-        public MapWindowVM(MapRepo repo) : base(repo)
+        public MapWindowVm(MapRepo repo) : base(repo)
         {
             //Setup test data
             //_repo.ClearMap();
             //_repo.CreateTestData();
             var hexes = _repo.GetMapContent();            
-            Hexes = ContertHexesToVm(hexes);
-            hexes = null;
+            Hexes = ConvertHexesToVm(hexes);
+            hexes.Clear();//Cleanup
 
             Brushes = _repo.GetBrushes();
 
@@ -38,10 +37,10 @@ namespace HexTool.VVM
             Window = new MapWindow(this);
         }
 
-        private List<HexContentVm> ContertHexesToVm(List<HexContent> hexes)
+        private List<HexContentVm> ConvertHexesToVm(List<HexContent> hexes)
         {
             var vmItems = new List<HexContentVm>();
-            foreach (HexContent hex in hexes)
+            foreach (var hex in hexes)
             {
                 vmItems.Add(new HexContentVm { Content = hex });
             }

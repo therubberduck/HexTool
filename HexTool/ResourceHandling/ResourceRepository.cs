@@ -16,8 +16,8 @@ namespace HexTool.ResourceHandling
             return _instance;
         }
 
-        private List<MapBrush> _brushes = new List<MapBrush>();
-        private Dictionary<int, SKBitmap> _imageBitmaps = new Dictionary<int, SKBitmap>();
+        private readonly List<MapBrush> _brushes = new List<MapBrush>();
+        private readonly Dictionary<int, SKBitmap> _imageBitmaps = new Dictionary<int, SKBitmap>();
 
         private ResourceRepository()
         {
@@ -33,7 +33,7 @@ namespace HexTool.ResourceHandling
         private void InitData()
         {
             var jsonText = File.ReadAllText("Resources/res.txt");
-            var jsonDo = JsonConvert.DeserializeObject<JsonDO>(jsonText);
+            var jsonDo = JsonConvert.DeserializeObject<RawJsonData>(jsonText);
 
             foreach (int imageId in jsonDo.Images.Keys)
             {
@@ -107,5 +107,11 @@ namespace HexTool.ResourceHandling
             //Or if the entire number is -1 (do nothing to existing texture)
             return imageId %1000 == 0 || imageId % 1000 == -1; 
         }
+    }
+
+    class RawJsonData
+    {
+        public Dictionary<int, string> Images;
+        public Dictionary<string, int[]> Brushes;
     }
 }
