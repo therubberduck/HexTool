@@ -7,32 +7,46 @@
         xmlns:local="clr-namespace:HexTool.VVM"
         xmlns:mhexMap="clr-namespace:HexTool.Model.HexMap"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="HexTool" 
         WindowStartupLocation="CenterScreen"
         Height="350" Width="525">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MapWindow.RedoCommand}" Executed="Redo"/>
         <CommandBinding Command="{x:Static local:MapWindow.UndoCommand}" Executed="Undo"/>
     </Window.CommandBindings>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <ItemsControl Width="100"
-            Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"
+    <DockPanel>
+        <Menu
+            DockPanel.Dock="Top">
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{x:Static local:MapWindow.UndoCommand}">
+                    <MenuItem.Icon><Image Height="10" Width="10" Source="pack://application:,,,/AppResources/ic_undo.png"/></MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Redo" Command="{x:Static local:MapWindow.RedoCommand}">
+                    <MenuItem.Icon>
+                        <Image Height="10" Width="10" Source="pack://application:,,,/AppResources/ic_redo.png"/></MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Attributions">
+                <MenuItem Header="Fugue Icons &#169; 2013 Yusuke Kamiyamane."/>
+            </MenuItem>
+        </Menu>
+        <ItemsControl 
+            DockPanel.Dock="Left"
+            Width="100"
+            Padding="5"
+            Background="LightGray"
             ItemsSource="{Binding Brushes}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="mhexMap:MapBrush">
                     <Button Content="{Binding Name}" Click="BrushButton_Click"/>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>            
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
         <hx:HexList Name="hxMap"
-            Grid.Column="1" Grid.Row="0"
-            ItemsSource="{Binding Path=Hexes, Mode=OneWay}"
-            ColumnCount="40" RowCount="40" Orientation="Horizontal" 
-            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    ItemsSource="{Binding Path=Hexes, Mode=OneWay}"
+                    ColumnCount="40" RowCount="40" Orientation="Horizontal" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    Background="Black">
             <hx:HexList.ItemContainerStyle>
                 <Style TargetType="{x:Type hx:HexItem}">
                     <Setter Property="Grid.Row" Value="{Binding Path=Y}"/>
@@ -50,5 +64,5 @@
                 </DataTemplate>
             </hx:HexList.ItemTemplate>
         </hx:HexList>
-    </Grid>
+    </DockPanel>
 </Window>
