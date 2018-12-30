@@ -10,6 +10,10 @@
         Title="MainWindow" 
         WindowStartupLocation="CenterScreen"
         Height="350" Width="525">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MapWindow.RedoCommand}" Executed="Redo"/>
+        <CommandBinding Command="{x:Static local:MapWindow.UndoCommand}" Executed="Undo"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>

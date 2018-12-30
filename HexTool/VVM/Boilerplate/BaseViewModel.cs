@@ -13,5 +13,12 @@ namespace HexTool.VVM
         {
             _repo = repo;
         }
+
+        public void SetAsMainAndRun(App app)
+        {
+            app.MainWindow = Window;
+            app.MainWindow?.Show();
+            app.Run();
+        }
     }
 }

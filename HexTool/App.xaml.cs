@@ -39,10 +39,7 @@ namespace HexTool
             Factory.Init();
 
             var rootVm = new MapWindowVm(new MapRepo(_db));
-
-            app.MainWindow = rootVm.Window;
-            app.MainWindow?.Show();
-            app.Run();
+            rootVm.SetAsMainAndRun(app);
         }
     }
 

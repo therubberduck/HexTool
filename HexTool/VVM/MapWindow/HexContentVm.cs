@@ -47,5 +47,12 @@ namespace HexTool.VVM
                 return bitmapImage;
             }
         }
+
+        public MapBrush CreateBrush()
+        {
+            return new MapBrush("Brush" + X + "," + Y, 
+                _content.BackgroundImageId, _content.TerrainImageId,
+                _content.VegetationImageId, _content.FeatureImageId);
+        }
     }
 }
