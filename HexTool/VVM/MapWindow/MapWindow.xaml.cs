@@ -51,5 +51,10 @@ namespace HexTool.VVM
         {
             _vm.Undo();
         }
+
+        private void FugueIconsLicenseMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://p.yusukekamiyamane.com/");
+        }
     }
 }

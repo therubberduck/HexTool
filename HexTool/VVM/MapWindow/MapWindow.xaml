@@ -27,7 +27,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Attributions">
-                <MenuItem Header="Fugue Icons &#169; 2013 Yusuke Kamiyamane."/>
+                <MenuItem Click="FugueIconsLicenseMenuItem_OnClick" Header="Fugue Icons &#169; 2013 Yusuke Kamiyamane."/>
             </MenuItem>
         </Menu>
         <ItemsControl 
